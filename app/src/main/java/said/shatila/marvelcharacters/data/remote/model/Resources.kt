@@ -1,13 +1,7 @@
 package said.shatila.marvelcharacters.data.remote.model
 
-sealed class NetworkResult<T>(
-    val data: T? = null,
-    val message: String? = null
-) {
-
-    class Success<T>(data: T) : NetworkResult<T>(data)
-
-    class Error<T>(message: String, data: T? = null) : NetworkResult<T>(data, message)
-
-    class Loading<T> : NetworkResult<T>()
+sealed class Resource<T>(val data: BaseResponse<T>? = null, val message:String?= null) {
+    class Success<T>(data: BaseResponse<T>): Resource<T>(data)
+    class  Error<T>(message: String= "", val stringResource:Int= -1) : Resource<T>(message = message)
+    class Loading<T> : Resource<T>()
 }

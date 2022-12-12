@@ -8,7 +8,8 @@ import said.shatila.marvelcharacters.data.remote.model.BaseResponse
 interface AppApi {
 
     @GET(EndPoints.getCharacters)
-    fun getCharacters(
+    suspend fun getCharacters(
+        @Query ("limit") limit: Int = 3,
     ): BaseResponse<CharactersResponse>
 
 }
