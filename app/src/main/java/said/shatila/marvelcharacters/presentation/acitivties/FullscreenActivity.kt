@@ -1,10 +1,13 @@
-package said.shatila.marvelcharacters
+package said.shatila.marvelcharacters.presentation.acitivties
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import said.shatila.marvelcharacters.databinding.ActivityFullscreenBinding
+import said.shatila.marvelcharacters.presentation.acitivties.characters.CharactersViewModel
 
-
+@AndroidEntryPoint
 class FullscreenActivity : AppCompatActivity() {
 
     private val binding: ActivityFullscreenBinding by lazy {
@@ -13,9 +16,12 @@ class FullscreenActivity : AppCompatActivity() {
         )
     }
 
+    private val charactersViewModel by viewModels<CharactersViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+//        charactersViewModel.getCharacters()
     }
 }
