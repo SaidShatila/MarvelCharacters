@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Marvelcharacters"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.acitivties.FullscreenActivity"
+            android:name=".presentation.acitivties.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"

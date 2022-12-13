@@ -12,7 +12,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import said.shatila.marvelcharacters.BuildConfig
 import said.shatila.marvelcharacters.data.remote.AppApi
 import said.shatila.marvelcharacters.data.remote.Constants.APIKEY
 import said.shatila.marvelcharacters.data.remote.Constants.BASE_URL
@@ -38,32 +37,16 @@ object AppModule {
     fun providesOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
-        when {
-            BuildConfig.DEBUG -> {
-                return OkHttpClient().newBuilder().addInterceptor { chain ->
-                    val currentTime = System.currentTimeMillis().toString()
-                    val newUrl =
-                        chain.request().url.newBuilder().addQueryParameter(TS, currentTime)
-                            .addQueryParameter(APIKEY, PUBLIC_KEY).addQueryParameter(
-                                HASH, provideToMd5(currentTime + PRIVATE_KEY + PUBLIC_KEY)
-                            ).build()
-                    val newRequest = chain.request().newBuilder().url(newUrl).build()
-                    chain.proceed(newRequest)
-                }.addInterceptor(logging).build()
-            }
-            else -> {
-                return OkHttpClient().newBuilder().addInterceptor { chain ->
-                    val currentTime = System.currentTimeMillis().toString()
-                    val newUrl =
-                        chain.request().url.newBuilder().addQueryParameter(TS, currentTime)
-                            .addQueryParameter(APIKEY, PUBLIC_KEY).addQueryParameter(
-                                HASH, provideToMd5(currentTime + PRIVATE_KEY + PUBLIC_KEY)
-                            ).build()
-                    val newRequest = chain.request().newBuilder().url(newUrl).build()
-                    chain.proceed(newRequest)
-                }.build()
-            }
-        }
+        return OkHttpClient().newBuilder().addInterceptor { chain ->
+            val currentTime = System.currentTimeMillis().toString()
+            val newUrl =
+                chain.request().url.newBuilder().addQueryParameter(TS, currentTime)
+                    .addQueryParameter(APIKEY, PUBLIC_KEY).addQueryParameter(
+                        HASH, (currentTime + PRIVATE_KEY + PUBLIC_KEY).md5()
+                    ).build()
+            val newRequest = chain.request().newBuilder().url(newUrl).build()
+            chain.proceed(newRequest)
+        }.addInterceptor(logging).build()
     }
 
     @Provides
@@ -91,8 +74,8 @@ object AppModule {
         return GsonBuilder().create()
     }
 
-    fun provideToMd5(encrypted: String): String {
-        var pass = encrypted
+    fun String.md5(): String {
+        var pass = this
         var encryptedString: String? = null
         val md5: MessageDigest
         try {
@@ -109,6 +92,4 @@ object AppModule {
         Log.d("provideToMd5:", "hash -> $encryptedString")
         return encryptedString ?: ""
     }
-
-
 }

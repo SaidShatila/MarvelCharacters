@@ -1,4 +1,4 @@
-package said.shatila.marvelcharacters.presentation.acitivties.characters
+package said.shatila.marvelcharacters.presentation.characters
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
