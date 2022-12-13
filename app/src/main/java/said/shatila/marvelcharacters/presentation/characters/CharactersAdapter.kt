@@ -2,11 +2,13 @@ package said.shatila.marvelcharacters.presentation.characters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import said.shatila.marvelcharacters.data.models.remote.response.CharacterResponse
 import said.shatila.marvelcharacters.databinding.ItemCharacterBinding
 
@@ -26,9 +28,12 @@ class CharactersAdapter(val onItemClicked: (character: CharacterResponse) -> Uni
         ) {
             with(binding) {
                 tvHeroName.text = characterResponse.name
-                val uri =
-                    characterResponse.thumbnail?.path + "." + characterResponse.thumbnail?.extension
-                ivHero.setImageURI(uri)
+
+                fun getUrl() = characterResponse.thumbnail.path.replace("http", "https")
+                val imagePath =
+                    Uri.parse("${getUrl()}.${characterResponse.thumbnail.extension}")
+
+                ivHero.setImageURI(imagePath)
                 this.root.setOnClickListener {
                     onItemClicked()
                 }

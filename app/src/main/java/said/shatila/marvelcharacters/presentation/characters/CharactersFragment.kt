@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import said.shatila.marvelcharacters.data.models.remote.response.CharacterResponse
 import said.shatila.marvelcharacters.databinding.FragmentCharactersBinding
 
+@AndroidEntryPoint
 class CharactersFragment : Fragment() {
     private val binding: FragmentCharactersBinding by lazy {
         FragmentCharactersBinding.inflate(
@@ -38,6 +41,34 @@ class CharactersFragment : Fragment() {
 
 
         setupRecyclerView()
+        charactersViewModel.viewModelScope.launch {
+            getCharactersData()
+        }
+        handleCharactersData()
+    }
+
+    private suspend fun getCharactersData() {
+        charactersViewModel.getCharacters()
+    }
+
+    private fun handleCharactersData() {
+        charactersViewModel.viewModelScope.launch {
+            charactersViewModel.uiState.collect { uiEvent ->
+                when (uiEvent) {
+                    is CharactersViewModel.UIEventCharacters.OnSuccess -> {
+                        setupData(uiEvent.transactionsResponse)
+                    }
+                    is CharactersViewModel.UIEventCharacters.OnLoading -> {
+                        binding.animationView.isVisible = uiEvent.isLoading
+                    }
+                    is CharactersViewModel.UIEventCharacters.ShowErrorDialog -> {
+                        binding.animationView.isVisible = false
+                    }
+                    is CharactersViewModel.UIEventCharacters.Nothing -> {
+                    }
+                }
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -49,20 +80,19 @@ class CharactersFragment : Fragment() {
         }
         binding.rvCharacters.adapter = adapter
         binding.rvCharacters.layoutManager =
-            LinearLayoutManager(requireContext(), GridLayoutManager.VERTICAL, false)
+            GridLayoutManager(requireContext(), 2)
         binding.rvCharacters.adapter = adapter.withLoadStateFooter(loadStateAdapter)
         adapter.addLoadStateListener {
-            if (it.refresh is LoadState.Loading)
-                showLoading()
+            if (it.refresh is LoadState.Loading) showLoading()
             else {
                 hideLoading()
             }
         }
     }
 
-    private fun setupData(transaction: PagingData<CharacterResponse>) {
+    private fun setupData(characters: PagingData<CharacterResponse>) {
 
-        adapter.submitData(lifecycle, transaction)
+        adapter.submitData(lifecycle, characters)
         adapter.addLoadStateListener {
             binding.rvCharacters.isVisible =
                 !(adapter.itemCount == 0 && it.refresh != LoadState.Loading)

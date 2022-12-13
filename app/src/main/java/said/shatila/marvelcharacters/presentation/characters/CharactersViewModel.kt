@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import said.shatila.marvelcharacters.data.models.remote.response.CharacterResponse
-import said.shatila.marvelcharacters.data.remote.model.Resource
 import said.shatila.marvelcharacters.domain.repository.MainRepository
 import javax.inject.Inject
 
@@ -21,25 +20,13 @@ class CharactersViewModel @Inject constructor(private val mainRepository: MainRe
     val uiState = _uiState.asStateFlow()
 
 
-  /*  suspend fun getCharacters() {
+    suspend fun getCharacters() {
         viewModelScope.launch {
-            mainRepository.getCharacters().collectLatest { uiState ->
-                when (uiState) {
-                    is Resource.Failure -> {
-                        _uiState.value = UIEventCharacters.OnLoading(false)
-                        _uiState.value = UIEventCharacters.ShowErrorDialog(uiState)
-                    }
-                    Resource.Loading -> {
-                        _uiState.value = UIEventCharacters.OnLoading(true)
-                    }
-                    is Resource.Success -> {
-                        _uiState.value = UIEventCharacters.OnLoading(false)
-                        _uiState.value = UIEventCharacters.OnSuccess(uiState.value)
-                    }
-                }
+            mainRepository.characters().collect {
+                _uiState.value = UIEventCharacters.OnSuccess(it)
             }
         }
-    }*/
+    }
 
 
     sealed interface UIEventCharacters {

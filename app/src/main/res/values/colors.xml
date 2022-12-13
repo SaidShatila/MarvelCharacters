@@ -15,4 +15,5 @@
     <color name="red">#FF0000</color>
     <color name="red_500">#FFC107</color>
     <color name="dim_foreground_disabled_material_dark">#39EF4C4C</color>
+    <color name="dim_foreground_disabled_material_light">#FF7F7F</color>
 </resources>
