@@ -1,6 +1,7 @@
 package said.shatila.marvelcharacters.di
 
 import android.util.Log
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -10,6 +11,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import said.shatila.marvelcharacters.BuildConfig
 import said.shatila.marvelcharacters.data.remote.AppApi
 import said.shatila.marvelcharacters.data.remote.Constants.APIKEY
@@ -62,22 +64,32 @@ object AppModule {
                 }.build()
             }
         }
-
     }
 
-    @Singleton
     @Provides
-    fun provideRetrofit(
-        okHttpClient: OkHttpClient, BASE_URL: String
-    ): Retrofit = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
-        .baseUrl(BASE_URL).client(okHttpClient).build()
+    @Singleton
+    fun provideRetrofitBuilder(
+        gson: Gson,
+        okHttpClient: OkHttpClient
+    ): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .client(okHttpClient)
+            .baseUrl(BASE_URL)
+            .build()
+    }
 
     @Provides
     @Singleton
     fun providesApiService(retrofit: Retrofit): AppApi =
         retrofit.create(AppApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return GsonBuilder().create()
+    }
 
     fun provideToMd5(encrypted: String): String {
         var pass = encrypted
@@ -97,4 +109,6 @@ object AppModule {
         Log.d("provideToMd5:", "hash -> $encryptedString")
         return encryptedString ?: ""
     }
+
+
 }
