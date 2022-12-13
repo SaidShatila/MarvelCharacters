@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/background_shape_rectangle_dim_red"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_hero"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="center"
+            app:placeholderImage="@drawable/ic_baseline_image_not_supported_24"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/tv_hero_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_text_view_red"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="80dp"
+            android:paddingVertical="10dp"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            tools:text="Test" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

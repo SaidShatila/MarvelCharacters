@@ -75,5 +75,11 @@ dependencies {
 
     implementation 'androidx.core:core-splashscreen:1.0.0'
 
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //PaginationJetpack
+    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+
 
 }

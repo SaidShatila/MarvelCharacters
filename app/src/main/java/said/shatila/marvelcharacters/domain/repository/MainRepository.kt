@@ -11,4 +11,5 @@ class MainRepository @Inject constructor(private val appApiImplementation: AppAp
         return appApiImplementation.getCharacters(limit = 3)
     }
 
+
 }
