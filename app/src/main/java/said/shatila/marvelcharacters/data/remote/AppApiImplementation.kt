@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class AppApiImplementation @Inject constructor(private val appApi: AppApi) : AppApi {
 
-    override suspend fun getCharacters(limit: Int): BaseResponse<CharactersResponse> = appApi.getCharacters(limit)
+    override suspend fun getCharacters(offset: Int, limit: Int): BaseResponse<CharactersResponse> = appApi.getCharacters(offset,limit)
 
 }

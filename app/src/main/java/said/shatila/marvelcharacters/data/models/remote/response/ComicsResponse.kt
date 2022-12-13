@@ -6,8 +6,3 @@ data class ComicsResponse(
     val items: List<CommonDetailsResponse>,
     val returned: Int
 )
-
-/*
-"resourceURI":"http://gateway.marvel.com/v1/public/comics/10225",
-                     "name":"Marvel Premiere (1972) #37"
-                  }*/
