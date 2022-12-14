@@ -1,7 +1,6 @@
 package said.shatila.marvelcharacters.presentation.characters
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ class CharactersAdapter(val onItemClicked: (character: CharacterResponse) -> Uni
     ) {
     class CharacterAdapterViewHolder(
         val binding: ItemCharacterBinding,
-        val context: Context,
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(
@@ -46,7 +44,7 @@ class CharactersAdapter(val onItemClicked: (character: CharacterResponse) -> Uni
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterAdapterViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCharacterBinding.inflate(inflater, parent, false)
-        return CharactersAdapter.CharacterAdapterViewHolder(binding, parent.context)
+        return CharacterAdapterViewHolder(binding)
     }
 }
 
