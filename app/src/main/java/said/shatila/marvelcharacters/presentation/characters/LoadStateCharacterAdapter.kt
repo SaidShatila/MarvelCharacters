@@ -12,27 +12,23 @@ import said.shatila.marvelcharacters.databinding.ItemMotionLoaderBinding
 class LoadStateCharacterAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<LoadStateCharacterAdapter.LoadStateViewHolder>() {
 
-
     class LoadStateViewHolder(
         private val ItemLoadingState: ItemMotionLoaderBinding,
         private val retry: () -> Unit,
     ) :
         RecyclerView.ViewHolder(ItemLoadingState.root) {
-
         private val motionLayout: MotionLayout = ItemLoadingState.mlLoader
         fun bind(loadState: LoadState) {
             with(ItemLoadingState) {
                 btnRetry.setOnClickListener {
                     retry()
                 }
-
             }
             if (loadState is LoadState.Loading) {
                 ItemLoadingState.pbLoader.isVisible = true
                 motionLayout.transitionToEnd()
             } else {
                 ItemLoadingState.pbLoader.isVisible = false
-
                 motionLayout.transitionToStart()
             }
         }

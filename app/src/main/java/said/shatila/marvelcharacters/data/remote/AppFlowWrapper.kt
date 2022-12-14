@@ -4,7 +4,6 @@ import said.shatila.marvelcharacters.data.remote.model.BaseResponse
 import said.shatila.marvelcharacters.util.NetworkResult
 
 abstract class BaseApiResponse {
-
     suspend fun <T> safeApiCall(apiCall: suspend () -> BaseResponse<T>): NetworkResult<T> {
         try {
             val response = apiCall()

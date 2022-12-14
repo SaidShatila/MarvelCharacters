@@ -37,5 +37,4 @@ class AppApiImplementation @Inject constructor(private val appApi: AppApi) : App
     ): BaseResponse<StoriesMainResponse> {
         return appApi.getCharacterStories(characterId, limit)
     }
-
 }

@@ -28,7 +28,6 @@ class CharactersViewModel @Inject constructor(private val mainRepository: MainRe
         }
     }
 
-
     sealed interface UIEventCharacters {
         object Nothing : UIEventCharacters
         data class OnSuccess(val transactionsResponse: PagingData<CharacterResponse>) :

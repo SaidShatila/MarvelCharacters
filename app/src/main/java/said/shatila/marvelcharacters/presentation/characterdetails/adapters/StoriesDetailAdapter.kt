@@ -14,7 +14,6 @@ import said.shatila.marvelcharacters.util.replaceUrlImage
 
 class StoriesDetailAdapter() :
     RecyclerView.Adapter<StoriesDetailAdapter.StoriesDetailViewHolder>() {
-
     private val mDiffer: AsyncListDiffer<StoriesDetailResponse?> =
         AsyncListDiffer<StoriesDetailResponse?>(
             this,
@@ -72,7 +71,6 @@ class StoriesDetailAdapter() :
     override fun onBindViewHolder(holder: StoriesDetailViewHolder, position: Int) {
         val StoriesDetailsResponse = mDiffer.currentList[position]
         StoriesDetailsResponse?.let { eventsDetail -> holder.bind(eventsDetail) }
-
     }
 
     override fun getItemCount(): Int = mDiffer.currentList.size

@@ -74,7 +74,6 @@ class ComicDetailAdapter() :
     override fun onBindViewHolder(holder: ComicDetailViewHolder, position: Int) {
         val comicDetailsResponse = mDiffer.currentList[position]
         comicDetailsResponse?.let { comicDetails -> holder.bind(comicDetails) }
-
     }
 
     override fun getItemCount(): Int = mDiffer.currentList.size

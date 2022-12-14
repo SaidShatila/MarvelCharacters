@@ -73,7 +73,6 @@ class SeriesDetailAdapter() : RecyclerView.Adapter<SeriesDetailAdapter.SeriesDet
     override fun onBindViewHolder(holder: SeriesDetailViewHolder, position: Int) {
         val SeriesDetailsResponse = mDiffer.currentList[position]
         SeriesDetailsResponse?.let { eventsDetail -> holder.bind(eventsDetail) }
-
     }
 
     override fun getItemCount(): Int = mDiffer.currentList.size

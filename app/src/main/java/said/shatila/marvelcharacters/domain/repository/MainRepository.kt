@@ -18,7 +18,6 @@ import javax.inject.Inject
 class MainRepository @Inject constructor(private val appApiImplementation: AppApiImplementation) :
     BaseApiResponse() {
 
-
     fun characters(): Flow<PagingData<CharacterResponse>> {
         return Pager(config = PagingConfig(pageSize = pageSize, maxSize = pageMax),
             pagingSourceFactory = { CharactersPagingSource(appApiImplementation) }).flow
@@ -56,8 +55,6 @@ class MainRepository @Inject constructor(private val appApiImplementation: AppAp
                 appApiImplementation.getCharacterStories(characterId, 3)
             })
         }.flowOn(Dispatchers.IO)
-
-
 }
 
 

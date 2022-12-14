@@ -43,7 +43,6 @@ class CharacterDetailFragment : Fragment() {
     private lateinit var seriesAdapter: SeriesDetailAdapter
     private lateinit var storiesAdapter: StoriesDetailAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,22 +64,10 @@ class CharacterDetailFragment : Fragment() {
         handleUiState()
     }
 
-    private suspend fun getCharacterComics() {
-        characterDetailViewModel.getComicDetails(characterId)
-    }
-
-    private suspend fun getCharacterEvents() {
-        characterDetailViewModel.getEventsDetails(characterId)
-    }
-
-    private suspend fun getCharacterSeries() {
-        characterDetailViewModel.getSeriesDetails(characterId)
-    }
-
-    private suspend fun getCharacterStories() {
-        characterDetailViewModel.getStoriesDetails(characterId)
-    }
-
+    private suspend fun getCharacterComics() =characterDetailViewModel.getComicDetails(characterId)
+    private suspend fun getCharacterEvents() = characterDetailViewModel.getEventsDetails(characterId)
+    private suspend fun getCharacterSeries() = characterDetailViewModel.getSeriesDetails(characterId)
+    private suspend fun getCharacterStories() = characterDetailViewModel.getStoriesDetails(characterId)
 
     private fun handleUiState() {
         characterDetailViewModel.viewModelScope.launch {
@@ -114,7 +101,6 @@ class CharacterDetailFragment : Fragment() {
             }
         }
     }
-
 
     private fun setTitle() {
         this.characterId = navArgs.characterId

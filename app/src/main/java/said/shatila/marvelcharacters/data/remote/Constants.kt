@@ -4,15 +4,12 @@ object Constants {
 
     const val BASE_URL = "https://gateway.marvel.com/v1/public/"
 
-
     const val getCharacters = "characters"
-
     const val character = "characters/{characterId}"
     const val characterComics = "characters/{characterId}/comics"
     const val characterEvents = "characters/{characterId}/events"
     const val characterSeries = "characters/{characterId}/series"
     const val characterStories = "characters/{characterId}/stories"
-
 
     const val TS = "ts"
     const val HASH = "hash"

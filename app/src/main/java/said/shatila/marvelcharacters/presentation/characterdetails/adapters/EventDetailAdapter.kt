@@ -74,7 +74,6 @@ class EventDetailAdapter() :
     override fun onBindViewHolder(holder: EventDetailViewHolder, position: Int) {
         val EventsDetailResponse = mDiffer.currentList[position]
         EventsDetailResponse?.let { eventsDetail -> holder.bind(eventsDetail) }
-
     }
 
     override fun getItemCount(): Int = mDiffer.currentList.size

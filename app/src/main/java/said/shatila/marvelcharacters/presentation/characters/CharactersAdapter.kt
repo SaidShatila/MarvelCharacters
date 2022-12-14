@@ -12,7 +12,6 @@ import said.shatila.marvelcharacters.databinding.ItemCharacterBinding
 import said.shatila.marvelcharacters.util.getUrlImageWithExtension
 import said.shatila.marvelcharacters.util.replaceUrlImage
 
-
 class CharactersAdapter(val onItemClicked: (character: CharacterResponse) -> Unit) :
     PagingDataAdapter<CharacterResponse, CharactersAdapter.CharacterAdapterViewHolder>(
         CharacterComparator
