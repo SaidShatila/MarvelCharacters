@@ -15,4 +15,5 @@
     <string name="title_s">Title: %s</string>
     <string name="description_s">Description: %s</string>
     <string name="dynamic">Dynamic</string>
+    <string name="no_data_found">No Data Found</string>
 </resources>

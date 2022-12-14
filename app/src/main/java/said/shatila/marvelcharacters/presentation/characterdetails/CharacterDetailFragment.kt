@@ -157,38 +157,81 @@ class CharacterDetailFragment : Fragment() {
 
     private fun setupRecyclerViewComic(comicList: List<ComicDetailsResponse>) {
         comicAdapter = ComicDetailAdapter()
-        viewBinding.rvCharacterComics.apply {
-            adapter = this@CharacterDetailFragment.comicAdapter
+        with(viewBinding) {
+            rvCharacterComics.apply {
+                adapter = this@CharacterDetailFragment.comicAdapter
+            }
+            if (comicList.isNotEmpty()) {
+                comicAdapter.submitList(comicList)
+                pbComics.isVisible = false
+                rvCharacterComics.isVisible = true
+                tvNoDataFoundComics.isVisible = false
+
+            } else {
+                tvNoDataFoundComics.isVisible = true
+                pbComics.isVisible = false
+                rvCharacterComics.isVisible = false
+            }
         }
-        comicAdapter.submitList(comicList)
-        viewBinding.pbComics.isVisible = false
     }
 
     private fun setupRecyclerViewEvent(eventsList: List<EventsDetailResponse>) {
         eventsAdapter = EventDetailAdapter()
-        viewBinding.rvCharacterEvents.apply {
-            adapter = this@CharacterDetailFragment.eventsAdapter
+        with(viewBinding) {
+            rvCharacterEvents.apply {
+                adapter = this@CharacterDetailFragment.eventsAdapter
+            }
+            if (eventsList.isNotEmpty()) {
+                eventsAdapter.submitList(eventsList)
+                pbEvents.isVisible = false
+                rvCharacterEvents.isVisible = true
+                tvNoDataFoundEvents.isVisible = false
+
+            } else {
+                tvNoDataFoundEvents.isVisible = true
+                pbEvents.isVisible = false
+                rvCharacterEvents.isVisible = false
+            }
         }
-        eventsAdapter.submitList(eventsList)
-        viewBinding.pbEvents.isVisible = false
     }
 
     private fun setupRecyclerViewSeries(seriesList: List<SeriesDetailResponse>) {
         seriesAdapter = SeriesDetailAdapter()
-        viewBinding.rvCharacterSeries.apply {
-            adapter = this@CharacterDetailFragment.seriesAdapter
+        with(viewBinding) {
+            rvCharacterSeries.apply {
+                adapter = this@CharacterDetailFragment.seriesAdapter
+            }
+            if (seriesList.isNotEmpty()) {
+                seriesAdapter.submitList(seriesList)
+                pbSeries.isVisible = false
+                rvCharacterSeries.isVisible = true
+                tvNoDataFoundSeries.isVisible = false
+
+            } else {
+                tvNoDataFoundSeries.isVisible = true
+                pbSeries.isVisible = false
+                rvCharacterSeries.isVisible = false
+            }
         }
-        seriesAdapter.submitList(seriesList)
-        viewBinding.pbSeries.isVisible = false
     }
 
     private fun setupRecyclerViewStories(storiesList: List<StoriesDetailResponse>) {
         storiesAdapter = StoriesDetailAdapter()
-        viewBinding.rvCharacterStories.apply {
-            adapter = this@CharacterDetailFragment.storiesAdapter
-        }
-        storiesAdapter.submitList(storiesList)
-        viewBinding.pbStories.isVisible = false
-    }
+        with(viewBinding) {
+            rvCharacterStories.apply {
+                adapter = this@CharacterDetailFragment.storiesAdapter
+            }
+            if (storiesList.isNotEmpty()) {
+                storiesAdapter.submitList(storiesList)
+                pbStories.isVisible = false
+                rvCharacterStories.isVisible = true
+                tvNoDataFoundStories.isVisible = false
 
+            } else {
+                tvNoDataFoundStories.isVisible = true
+                pbStories.isVisible = false
+                rvCharacterStories.isVisible = false
+            }
+        }
+    }
 }

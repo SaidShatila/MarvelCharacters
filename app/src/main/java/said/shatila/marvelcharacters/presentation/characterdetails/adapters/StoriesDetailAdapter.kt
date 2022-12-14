@@ -41,7 +41,7 @@ class StoriesDetailAdapter() :
             with(binding) {
                 tvTitle.text = StoriesDetailsResponse.title
                 tvDescription.text = StoriesDetailsResponse.description
-                val getUrl = StoriesDetailsResponse.thumbnail?.path?.replaceUrlImage()
+               /* val getUrl = StoriesDetailsResponse.thumbnail?.path?.replaceUrlImage()
                 val imagePath =
                     Uri.parse(
                         StoriesDetailsResponse.thumbnail?.extension?.let { extenstion ->
@@ -53,7 +53,7 @@ class StoriesDetailAdapter() :
                             }
                         }
                     )
-                ivDynamicItem.setImageURI(imagePath)
+                ivDynamicItem.setImageURI(imagePath)*/
                 tvDynamicItem.text = StoriesDetailsResponse.type
 
             }

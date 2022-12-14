@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:clipToPadding="false"
+            android:visibility="visible"
             android:orientation="horizontal"
             android:paddingHorizontal="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -70,10 +71,23 @@
             app:layout_constraintTop_toBottomOf="@id/tv_character_comics" />
 
         <TextView
+            android:id="@+id/tv_no_data_found_comics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/no_data_found"
+            android:textAlignment="center"
+            android:textColor="@color/ochre"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/tv_character_events"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_comics" />
+
+        <TextView
             android:id="@+id/tv_character_events"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/drawable_text_background_red_stroke_dim_background"
             android:fontFamily="@font/roboto_medium"
             android:paddingHorizontal="10dp"
@@ -112,12 +126,24 @@
             app:layout_constraintBottom_toTopOf="@id/view_sep_two"
             app:layout_constraintTop_toBottomOf="@id/tv_character_events" />
 
+        <TextView
+            android:id="@+id/tv_no_data_found_events"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:text="@string/no_data_found"
+            android:textAlignment="center"
+            android:textColor="@color/ochre"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/tv_character_stories"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_events" />
 
         <TextView
             android:id="@+id/tv_character_stories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/drawable_text_background_red_stroke_dim_background"
             android:fontFamily="@font/roboto_medium"
             android:paddingHorizontal="10dp"
@@ -157,10 +183,23 @@
             app:layout_constraintTop_toBottomOf="@id/tv_character_stories" />
 
         <TextView
+            android:id="@+id/tv_no_data_found_stories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:text="@string/no_data_found"
+            android:textAlignment="center"
+            android:textColor="@color/ochre"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/tv_character_series"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_stories" />
+
+        <TextView
             android:id="@+id/tv_character_series"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/drawable_text_background_red_stroke_dim_background"
             android:fontFamily="@font/roboto_medium"
             android:paddingHorizontal="10dp"
@@ -199,6 +238,17 @@
             app:layout_constraintBottom_toTopOf="@id/view_sep_four"
             app:layout_constraintTop_toBottomOf="@id/tv_character_series" />
 
+        <TextView
+            android:id="@+id/tv_no_data_found_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/no_data_found"
+            android:textAlignment="center"
+            android:textColor="@color/ochre"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_series" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
