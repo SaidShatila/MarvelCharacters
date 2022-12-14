@@ -1,6 +1,5 @@
 package said.shatila.marvelcharacters.di
 
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -19,9 +18,7 @@ import said.shatila.marvelcharacters.data.remote.Constants.HASH
 import said.shatila.marvelcharacters.data.remote.Constants.PRIVATE_KEY
 import said.shatila.marvelcharacters.data.remote.Constants.PUBLIC_KEY
 import said.shatila.marvelcharacters.data.remote.Constants.TS
-import java.math.BigInteger
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
+import said.shatila.marvelcharacters.util.md5
 import javax.inject.Singleton
 
 
@@ -72,24 +69,5 @@ object AppModule {
     @Singleton
     fun provideGson(): Gson {
         return GsonBuilder().create()
-    }
-
-    fun String.md5(): String {
-        var pass = this
-        var encryptedString: String? = null
-        val md5: MessageDigest
-        try {
-            md5 = MessageDigest.getInstance("MD5")
-            md5.update(pass.toByteArray(), 0, pass.length)
-            pass = BigInteger(1, md5.digest()).toString(16)
-            while (pass.length < 32) {
-                pass = "0$pass"
-            }
-            encryptedString = pass
-        } catch (e1: NoSuchAlgorithmException) {
-            e1.printStackTrace()
-        }
-        Log.d("provideToMd5:", "hash -> $encryptedString")
-        return encryptedString ?: ""
     }
 }
