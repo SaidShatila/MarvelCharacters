@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/dim_foreground_disabled_material_light">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_characters"
         android:name="said.shatila.marvelcharacters.ItemFragment"

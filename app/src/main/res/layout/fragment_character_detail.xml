@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <TextView
             android:id="@+id/tv_character_id"
             android:layout_width="match_parent"
@@ -24,7 +23,6 @@
             android:textColor="@color/internation_orange_gate_bridge"
             android:textSize="24sp"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/tv_character_comics"
