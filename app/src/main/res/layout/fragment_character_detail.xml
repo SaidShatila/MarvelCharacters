@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tv_character_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/drawable_text_background_red_stroke_dim_background"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="10dp"
+            android:text="@string/character_id"
+            android:textAlignment="textStart"
+            android:textColor="@color/internation_orange_gate_bridge"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_character_comics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/drawable_text_background_red_stroke_dim_background"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="10dp"
+            android:text="@string/comics"
+            android:textAlignment="center"
+            android:textColor="@color/internation_orange_gate_bridge"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_id" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_character_comics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_comics"
+            tools:listitem="@layout/item_character" />
+
+        <View
+            android:id="@+id/view_sep_one"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/rv_character_comics" />
+
+        <ProgressBar
+            android:id="@+id/pb_comics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/burgundy"
+            android:progressTint="@color/burgundy_dim"
+            android:secondaryProgressTint="@color/burgundy"
+            app:layout_constraintBottom_toTopOf="@id/view_sep_one"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_comics" />
+
+        <TextView
+            android:id="@+id/tv_character_events"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/drawable_text_background_red_stroke_dim_background"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="10dp"
+            android:text="@string/events"
+            android:textAlignment="center"
+            android:textColor="@color/internation_orange_gate_bridge"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/view_sep_one" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_character_events"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_events"
+            tools:listitem="@layout/item_character" />
+
+        <View
+            android:id="@+id/view_sep_two"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/rv_character_events" />
+
+        <ProgressBar
+            android:id="@+id/pb_events"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/burgundy"
+            android:progressTint="@color/burgundy_dim"
+            android:secondaryProgressTint="@color/burgundy"
+            app:layout_constraintBottom_toTopOf="@id/view_sep_two"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_events" />
+
+
+        <TextView
+            android:id="@+id/tv_character_stories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/drawable_text_background_red_stroke_dim_background"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="10dp"
+            android:text="@string/stories"
+            android:textAlignment="center"
+            android:textColor="@color/internation_orange_gate_bridge"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/view_sep_two" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_character_stories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_stories"
+            tools:listitem="@layout/item_character" />
+
+        <View
+            android:id="@+id/view_sep_three"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/rv_character_stories" />
+
+        <ProgressBar
+            android:id="@+id/pb_stories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/burgundy"
+            android:progressTint="@color/burgundy_dim"
+            android:secondaryProgressTint="@color/burgundy"
+            app:layout_constraintBottom_toTopOf="@id/view_sep_three"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_stories" />
+
+        <TextView
+            android:id="@+id/tv_character_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/drawable_text_background_red_stroke_dim_background"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="10dp"
+            android:text="@string/series"
+            android:textAlignment="center"
+            android:textColor="@color/internation_orange_gate_bridge"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/view_sep_three" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_character_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_series"
+            tools:listitem="@layout/item_character" />
+
+        <View
+            android:id="@+id/view_sep_four"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/rv_character_series" />
+
+        <ProgressBar
+            android:id="@+id/pb_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/burgundy"
+            android:progressTint="@color/burgundy_dim"
+            android:secondaryProgressTint="@color/burgundy"
+            app:layout_constraintBottom_toTopOf="@id/view_sep_four"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_series" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+
