@@ -1,4 +1,4 @@
-package said.shatila.marvelcharacters.presentation.characterdetails
+package said.shatila.marvelcharacters.presentation.characterdetails.adapters
 
 import android.content.Context
 import android.net.Uri
@@ -7,44 +7,43 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import said.shatila.marvelcharacters.data.models.remote.response.ComicDetailsResponse
+import said.shatila.marvelcharacters.data.models.remote.response.SeriesDetailResponse
 import said.shatila.marvelcharacters.databinding.ItemDynamicCharacterDetailBinding
 import said.shatila.marvelcharacters.util.getUrlImageWithExtension
 import said.shatila.marvelcharacters.util.replaceUrlImage
 
-class CharacterDetailAdapter() :
-    RecyclerView.Adapter<CharacterDetailAdapter.CharacterDetailViewHolder>() {
+class SeriesDetailAdapter() : RecyclerView.Adapter<SeriesDetailAdapter.SeriesDetailViewHolder>() {
 
-    private val mDiffer: AsyncListDiffer<ComicDetailsResponse?> =
-        AsyncListDiffer<ComicDetailsResponse?>(
+    private val mDiffer: AsyncListDiffer<SeriesDetailResponse?> =
+        AsyncListDiffer<SeriesDetailResponse?>(
             this,
-            object : DiffUtil.ItemCallback<ComicDetailsResponse?>() {
+            object : DiffUtil.ItemCallback<SeriesDetailResponse?>() {
                 override fun areItemsTheSame(
-                    oldItem: ComicDetailsResponse, newItem: ComicDetailsResponse
+                    oldItem: SeriesDetailResponse, newItem: SeriesDetailResponse
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: ComicDetailsResponse, newItem: ComicDetailsResponse
+                    oldItem: SeriesDetailResponse, newItem: SeriesDetailResponse
                 ): Boolean {
                     return oldItem == newItem
                 }
             })
 
-    class CharacterDetailViewHolder(
+    class SeriesDetailViewHolder(
         val binding: ItemDynamicCharacterDetailBinding,
         val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(comicDetailsResponse: ComicDetailsResponse) {
+        fun bind(SeriesDetailsResponse: SeriesDetailResponse) {
             with(binding) {
-                tvTitle.text = comicDetailsResponse.title
-                tvDescription.text = comicDetailsResponse.description
-                val getUrl = comicDetailsResponse.thumbnail?.path?.replaceUrlImage()
+                tvTitle.text = SeriesDetailsResponse.title
+                tvDescription.text = SeriesDetailsResponse.description
+                val getUrl = SeriesDetailsResponse.thumbnail?.path?.replaceUrlImage()
                 val imagePath =
                     Uri.parse(
-                        comicDetailsResponse.thumbnail?.extension?.let { extenstion ->
+                        SeriesDetailsResponse.thumbnail?.extension?.let { extenstion ->
                             getUrl?.let { url ->
                                 getUrlImageWithExtension(
                                     url,
@@ -54,10 +53,10 @@ class CharacterDetailAdapter() :
                         }
                     )
                 ivDynamicItem.setImageURI(imagePath)
-                comicDetailsResponse.prices?.forEach { priceResponse ->
-                    tvDynamicItem.text = priceResponse.price.toString()
+                val nextPrev =
+                    "${SeriesDetailsResponse.next?.name} - ${SeriesDetailsResponse.previous?.name}"
+                tvDynamicItem.text = nextPrev
 
-                }
             }
         }
     }
@@ -65,22 +64,21 @@ class CharacterDetailAdapter() :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CharacterDetailViewHolder {
+    ): SeriesDetailViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemDynamicCharacterDetailBinding.inflate(inflater, parent, false)
-        return CharacterDetailViewHolder(binding, parent.context)
+        return SeriesDetailViewHolder(binding, parent.context)
     }
 
-    override fun onBindViewHolder(holder: CharacterDetailViewHolder, position: Int) {
-        val comicDetailsResponse = mDiffer.currentList[position]
-        comicDetailsResponse?.let { comicDetails -> holder.bind(comicDetails) }
+    override fun onBindViewHolder(holder: SeriesDetailViewHolder, position: Int) {
+        val SeriesDetailsResponse = mDiffer.currentList[position]
+        SeriesDetailsResponse?.let { eventsDetail -> holder.bind(eventsDetail) }
 
     }
 
     override fun getItemCount(): Int = mDiffer.currentList.size
 
-    fun submitList(list: List<ComicDetailsResponse?>) {
+    fun submitList(list: List<SeriesDetailResponse?>) {
         mDiffer.submitList(list)
     }
-
 }

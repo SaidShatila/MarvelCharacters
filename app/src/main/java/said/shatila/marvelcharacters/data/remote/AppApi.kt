@@ -5,7 +5,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import said.shatila.marvelcharacters.data.models.remote.response.*
 import said.shatila.marvelcharacters.data.remote.model.BaseResponse
-import said.shatila.marvelcharacters.data.remote.model.MainApiResponse
 
 interface AppApi {
 
@@ -19,23 +18,23 @@ interface AppApi {
     suspend fun getCharacterComics(
         @Path("characterId") characterId: Int,
         @Query("limit") limit: Int = 3,
-    ): BaseResponse<MainApiResponse>
+    ): BaseResponse<ComicMainResponse>
 
     @GET(Constants.characterEvents)
     suspend fun getCharacterEvents(
         @Path("characterId") characterId: Int,
         @Query("limit") limit: Int = 3,
-    ): BaseResponse<List<EventsDetailsResponse>>
+    ): BaseResponse<EventsMainResponse>
 
     @GET(Constants.characterSeries)
     suspend fun getCharacterSeries(
         @Path("characterId") characterId: Int,
         @Query("limit") limit: Int = 3,
-    ): BaseResponse<List<SeriesDetailsResponse>>
+    ): BaseResponse<SeriesMainResponse>
 
     @GET(Constants.characterStories)
     suspend fun getCharacterStories(
         @Path("characterId") characterId: Int,
         @Query("limit") limit: Int = 3,
-    ): BaseResponse<List<StoriesDetailsResponse>>
+    ): BaseResponse<StoriesMainResponse>
 }

@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import said.shatila.marvelcharacters.data.models.remote.response.ComicDetailsResponse
+import said.shatila.marvelcharacters.data.models.remote.response.EventsDetailResponse
+import said.shatila.marvelcharacters.data.models.remote.response.SeriesDetailResponse
+import said.shatila.marvelcharacters.data.models.remote.response.StoriesDetailResponse
 import said.shatila.marvelcharacters.domain.repository.MainRepository
 import said.shatila.marvelcharacters.util.NetworkResult
 import javax.inject.Inject
@@ -17,6 +20,12 @@ class CharacterDetailViewModel @Inject constructor(private val mainRepository: M
     ViewModel() {
     sealed class UIEventCharacterDetail {
         data class OnSuccessComicDetail(val listOfComic: List<ComicDetailsResponse>?) :
+            UIEventCharacterDetail()
+        data class OnSuccessEventsDetail(val listOfEvents: List<EventsDetailResponse>?) :
+            UIEventCharacterDetail()
+        data class OnSuccessSeriesDetail(val listOfSeries: List<SeriesDetailResponse>?) :
+            UIEventCharacterDetail()
+        data class OnSuccessStoriesDetail(val listOfStories: List<StoriesDetailResponse>?) :
             UIEventCharacterDetail()
 
         data class OnError(val resourceFailure: String?) : UIEventCharacterDetail()
@@ -34,6 +43,57 @@ class CharacterDetailViewModel @Inject constructor(private val mainRepository: M
                 when (it) {
                     is NetworkResult.Success -> {
                         _uiState.value = UIEventCharacterDetail.OnSuccessComicDetail(it.data?.results)
+                    }
+                    is NetworkResult.Error -> {
+                        _uiState.value = UIEventCharacterDetail.OnError(it.message)
+                    }
+                    is NetworkResult.Loading -> {
+                        _uiState.value = UIEventCharacterDetail.OnLoading(true)
+                    }
+                }
+            }
+        }
+    }
+    suspend fun getEventsDetails(characterId: Int) {
+        viewModelScope.launch {
+            mainRepository.getCharacterEvents(characterId).collectLatest {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        _uiState.value = UIEventCharacterDetail.OnSuccessEventsDetail(it.data?.results)
+                    }
+                    is NetworkResult.Error -> {
+                        _uiState.value = UIEventCharacterDetail.OnError(it.message)
+                    }
+                    is NetworkResult.Loading -> {
+                        _uiState.value = UIEventCharacterDetail.OnLoading(true)
+                    }
+                }
+            }
+        }
+    }
+    suspend fun getSeriesDetails(characterId: Int) {
+        viewModelScope.launch {
+            mainRepository.getCharacterSeries(characterId).collectLatest {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        _uiState.value = UIEventCharacterDetail.OnSuccessSeriesDetail(it.data?.results)
+                    }
+                    is NetworkResult.Error -> {
+                        _uiState.value = UIEventCharacterDetail.OnError(it.message)
+                    }
+                    is NetworkResult.Loading -> {
+                        _uiState.value = UIEventCharacterDetail.OnLoading(true)
+                    }
+                }
+            }
+        }
+    }
+    suspend fun getStoriesDetails(characterId: Int) {
+        viewModelScope.launch {
+            mainRepository.getCharacterStories(characterId).collectLatest {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        _uiState.value = UIEventCharacterDetail.OnSuccessStoriesDetail(it.data?.results)
                     }
                     is NetworkResult.Error -> {
                         _uiState.value = UIEventCharacterDetail.OnError(it.message)
