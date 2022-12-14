@@ -10,6 +10,24 @@
         android:label="Characters"
         tools:layout="@layout/fragment_characters">
 
+        <action
+            android:id="@+id/action_charactersFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="said.shatila.marvelcharacters.presentation.characterdetails.CharacterDetailFragment"
+        android:label="Character Details"
+        tools:layout="@layout/fragment_character_detail">
+        <argument
+            android:name="characterId"
+            app:argType="integer" />
+        <argument
+            android:name="characterName"
+            app:argType="string" />
     </fragment>
 
 </navigation>

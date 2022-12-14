@@ -20,7 +20,7 @@
             android:fontFamily="@font/roboto_medium"
             android:paddingHorizontal="10dp"
             android:text="@string/character_id"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textColor="@color/internation_orange_gate_bridge"
             android:textSize="24sp"
             app:layout_constraintTop_toTopOf="parent" />

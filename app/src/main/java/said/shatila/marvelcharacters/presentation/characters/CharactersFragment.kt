@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
@@ -72,8 +73,13 @@ class CharactersFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = CharactersAdapter() {
-
+        adapter = CharactersAdapter() { characterResponse ->
+            findNavController().navigate(
+                CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(
+                    characterResponse.id,
+                    characterResponse.name
+                )
+            )
         }
         loadStateAdapter = LoadStateCharacterAdapter {
             adapter.retry()
