@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import said.shatila.marvelcharacters.data.models.remote.response.CharacterResponse
 import said.shatila.marvelcharacters.databinding.ItemCharacterBinding
+import said.shatila.marvelcharacters.util.getUrlImageWithExtension
+import said.shatila.marvelcharacters.util.replaceUrlImage
 
 
 class CharactersAdapter(val onItemClicked: (character: CharacterResponse) -> Unit) :
@@ -25,9 +27,14 @@ class CharactersAdapter(val onItemClicked: (character: CharacterResponse) -> Uni
         ) {
             with(binding) {
                 tvHeroName.text = characterResponse.name
-                val getUrl = characterResponse.thumbnail.path.replace("http", "https")
+                val getUrl = characterResponse.thumbnail.path.replaceUrlImage()
                 val imagePath =
-                    Uri.parse("${getUrl}.${characterResponse.thumbnail.extension}")
+                    Uri.parse(
+                        getUrlImageWithExtension(
+                            getUrl,
+                            characterResponse.thumbnail.extension
+                        )
+                    )
                 ivHero.setImageURI(imagePath)
                 this.root.setOnClickListener {
                     onItemClicked()

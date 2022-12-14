@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.Marvelcharacters" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimary">@color/internation_orange_gate_bridge</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#570404</item>
+        <item name="colorSecondary">@color/burgundy_dim</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@android:color/transparent</item>

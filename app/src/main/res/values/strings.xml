@@ -7,4 +7,13 @@
     <string name="check_server">check_server</string>
     <string name="network_error_message">Something went wrong</string>
     <string name="text_try_again">Try Again</string>
+    <string name="character_id">Character Id = %s</string>
+    <string name="comics">Comics</string>
+    <string name="events">Events</string>
+    <string name="stories">Stories</string>
+    <string name="series">Series</string>
+    <string name="title_s">Title: %s</string>
+    <string name="description_s">Description: %s</string>
+    <string name="dynamic">Dynamic</string>
+    <string name="no_data_found">No Data Found</string>
 </resources>
