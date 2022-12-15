@@ -1,31 +1,29 @@
 package said.shatila.marvelcharacters.presentation.characterdetails.adapters
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import said.shatila.marvelcharacters.data.models.remote.response.StoriesDetailResponse
+import said.shatila.marvelcharacters.R
+import said.shatila.marvelcharacters.data.models.remote.response.CommonCharacterDetailResponse
 import said.shatila.marvelcharacters.databinding.ItemDynamicCharacterDetailBinding
-import said.shatila.marvelcharacters.util.getUrlImageWithExtension
-import said.shatila.marvelcharacters.util.replaceUrlImage
 
 class StoriesDetailAdapter() :
     RecyclerView.Adapter<StoriesDetailAdapter.StoriesDetailViewHolder>() {
-    private val mDiffer: AsyncListDiffer<StoriesDetailResponse?> =
-        AsyncListDiffer<StoriesDetailResponse?>(
+    private val mDiffer: AsyncListDiffer<CommonCharacterDetailResponse?> =
+        AsyncListDiffer<CommonCharacterDetailResponse?>(
             this,
-            object : DiffUtil.ItemCallback<StoriesDetailResponse?>() {
+            object : DiffUtil.ItemCallback<CommonCharacterDetailResponse?>() {
                 override fun areItemsTheSame(
-                    oldItem: StoriesDetailResponse, newItem: StoriesDetailResponse
+                    oldItem: CommonCharacterDetailResponse, newItem: CommonCharacterDetailResponse
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: StoriesDetailResponse, newItem: StoriesDetailResponse
+                    oldItem: CommonCharacterDetailResponse, newItem: CommonCharacterDetailResponse
                 ): Boolean {
                     return oldItem == newItem
                 }
@@ -36,24 +34,27 @@ class StoriesDetailAdapter() :
         val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(StoriesDetailsResponse: StoriesDetailResponse) {
+        fun bind(commonCharacterDetailResponse: CommonCharacterDetailResponse) {
             with(binding) {
-                tvTitle.text = StoriesDetailsResponse.title
-                tvDescription.text = StoriesDetailsResponse.description
-               /* val getUrl = StoriesDetailsResponse.thumbnail?.path?.replaceUrlImage()
-                val imagePath =
-                    Uri.parse(
-                        StoriesDetailsResponse.thumbnail?.extension?.let { extenstion ->
-                            getUrl?.let { url ->
-                                getUrlImageWithExtension(
-                                    url,
-                                    extenstion
-                                )
+                tvTitle.text =
+                    commonCharacterDetailResponse.title ?: context.getString(R.string.no_title)
+                tvDescription.text = commonCharacterDetailResponse.description ?: context.getString(
+                    R.string.no_description
+                )
+                /*    val getUrl = commonCharacterDetailResponse.thumbnail?.path?.replaceUrlImage()
+                    val imagePath =
+                        Uri.parse(
+                            commonCharacterDetailResponse.thumbnail?.extension?.let { extenstion ->
+                                getUrl?.let { url ->
+                                    getUrlImageWithExtension(
+                                        url,
+                                        extenstion
+                                    )
+                                }
                             }
-                        }
-                    )
-                ivDynamicItem.setImageURI(imagePath)*/
-                tvDynamicItem.text = StoriesDetailsResponse.type
+                        )
+                    ivDynamicItem.setImageURI(imagePath)*/
+                tvDynamicItem.text = commonCharacterDetailResponse.type
 
             }
         }
@@ -75,7 +76,7 @@ class StoriesDetailAdapter() :
 
     override fun getItemCount(): Int = mDiffer.currentList.size
 
-    fun submitList(list: List<StoriesDetailResponse?>) {
+    fun submitList(list: List<CommonCharacterDetailResponse?>) {
         mDiffer.submitList(list)
     }
 }

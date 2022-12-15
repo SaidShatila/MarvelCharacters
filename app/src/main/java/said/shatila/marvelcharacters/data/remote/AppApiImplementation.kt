@@ -2,7 +2,6 @@ package said.shatila.marvelcharacters.data.remote
 
 import said.shatila.marvelcharacters.data.models.remote.response.*
 import said.shatila.marvelcharacters.data.remote.model.BaseResponse
-import said.shatila.marvelcharacters.data.models.remote.response.ComicMainResponse
 import javax.inject.Inject
 
 class AppApiImplementation @Inject constructor(private val appApi: AppApi) : AppApi {
@@ -13,28 +12,28 @@ class AppApiImplementation @Inject constructor(private val appApi: AppApi) : App
     override suspend fun getCharacterComics(
         characterId: Int,
         limit: Int
-    ): BaseResponse<ComicMainResponse> {
+    ): BaseResponse<CommonMainCharacterDetailResponse> {
         return appApi.getCharacterComics(characterId, limit)
     }
 
     override suspend fun getCharacterEvents(
         characterId: Int,
         limit: Int
-    ): BaseResponse<EventsMainResponse> {
+    ): BaseResponse<CommonMainCharacterDetailResponse> {
         return appApi.getCharacterEvents(characterId, limit)
     }
 
     override suspend fun getCharacterSeries(
         characterId: Int,
         limit: Int
-    ): BaseResponse<SeriesMainResponse> {
+    ): BaseResponse<CommonMainCharacterDetailResponse> {
         return appApi.getCharacterSeries(characterId, limit)
     }
 
     override suspend fun getCharacterStories(
         characterId: Int,
         limit: Int
-    ): BaseResponse<StoriesMainResponse> {
+    ): BaseResponse<CommonMainCharacterDetailResponse> {
         return appApi.getCharacterStories(characterId, limit)
     }
 }

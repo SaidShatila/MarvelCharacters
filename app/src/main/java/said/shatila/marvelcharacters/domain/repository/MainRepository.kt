@@ -28,28 +28,28 @@ class MainRepository @Inject constructor(private val appApiImplementation: AppAp
         const val pageMax: Int = 200
     }
 
-    suspend fun getCharacterComics(characterId: Int): Flow<NetworkResult<ComicMainResponse>> =
+    suspend fun getCharacterComics(characterId: Int): Flow<NetworkResult<CommonMainCharacterDetailResponse>> =
         flow {
             emit(safeApiCall {
                 appApiImplementation.getCharacterComics(characterId, 3)
             })
         }.flowOn(Dispatchers.IO)
 
-    suspend fun getCharacterEvents(characterId: Int): Flow<NetworkResult<EventsMainResponse>> =
+    suspend fun getCharacterEvents(characterId: Int): Flow<NetworkResult<CommonMainCharacterDetailResponse>> =
         flow {
             emit(safeApiCall {
                 appApiImplementation.getCharacterEvents(characterId, 3)
             })
         }.flowOn(Dispatchers.IO)
 
-    suspend fun getCharacterSeries(characterId: Int): Flow<NetworkResult<SeriesMainResponse>> =
+    suspend fun getCharacterSeries(characterId: Int): Flow<NetworkResult<CommonMainCharacterDetailResponse>> =
         flow {
             emit(safeApiCall {
                 appApiImplementation.getCharacterSeries(characterId, 3)
             })
         }.flowOn(Dispatchers.IO)
 
-    suspend fun getCharacterStories(characterId: Int): Flow<NetworkResult<StoriesMainResponse>> =
+    suspend fun getCharacterStories(characterId: Int): Flow<NetworkResult<CommonMainCharacterDetailResponse>> =
         flow {
             emit(safeApiCall {
                 appApiImplementation.getCharacterStories(characterId, 3)

@@ -7,10 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import said.shatila.marvelcharacters.data.models.remote.response.ComicDetailsResponse
-import said.shatila.marvelcharacters.data.models.remote.response.EventsDetailResponse
-import said.shatila.marvelcharacters.data.models.remote.response.SeriesDetailResponse
-import said.shatila.marvelcharacters.data.models.remote.response.StoriesDetailResponse
+import said.shatila.marvelcharacters.data.models.remote.response.*
 import said.shatila.marvelcharacters.domain.repository.MainRepository
 import said.shatila.marvelcharacters.util.NetworkResult
 import javax.inject.Inject
@@ -19,13 +16,13 @@ import javax.inject.Inject
 class CharacterDetailViewModel @Inject constructor(private val mainRepository: MainRepository) :
     ViewModel() {
     sealed class UIEventCharacterDetail {
-        data class OnSuccessComicDetail(val listOfComic: List<ComicDetailsResponse>?) :
+        data class OnSuccessComicDetail(val listOfComic: List<CommonCharacterDetailResponse>?) :
             UIEventCharacterDetail()
-        data class OnSuccessEventsDetail(val listOfEvents: List<EventsDetailResponse>?) :
+        data class OnSuccessEventsDetail(val listOfEvents: List<CommonCharacterDetailResponse>?) :
             UIEventCharacterDetail()
-        data class OnSuccessSeriesDetail(val listOfSeries: List<SeriesDetailResponse>?) :
+        data class OnSuccessSeriesDetail(val listOfSeries: List<CommonCharacterDetailResponse>?) :
             UIEventCharacterDetail()
-        data class OnSuccessStoriesDetail(val listOfStories: List<StoriesDetailResponse>?) :
+        data class OnSuccessStoriesDetail(val listOfStories: List<CommonCharacterDetailResponse>?) :
             UIEventCharacterDetail()
 
         data class OnError(val resourceFailure: String?) : UIEventCharacterDetail()

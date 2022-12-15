@@ -7,25 +7,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import said.shatila.marvelcharacters.data.models.remote.response.SeriesDetailResponse
+import said.shatila.marvelcharacters.R
+import said.shatila.marvelcharacters.data.models.remote.response.CommonCharacterDetailResponse
 import said.shatila.marvelcharacters.databinding.ItemDynamicCharacterDetailBinding
 import said.shatila.marvelcharacters.util.getUrlImageWithExtension
 import said.shatila.marvelcharacters.util.replaceUrlImage
 
 class SeriesDetailAdapter() : RecyclerView.Adapter<SeriesDetailAdapter.SeriesDetailViewHolder>() {
 
-    private val mDiffer: AsyncListDiffer<SeriesDetailResponse?> =
-        AsyncListDiffer<SeriesDetailResponse?>(
+    private val mDiffer: AsyncListDiffer<CommonCharacterDetailResponse?> =
+        AsyncListDiffer<CommonCharacterDetailResponse?>(
             this,
-            object : DiffUtil.ItemCallback<SeriesDetailResponse?>() {
+            object : DiffUtil.ItemCallback<CommonCharacterDetailResponse?>() {
                 override fun areItemsTheSame(
-                    oldItem: SeriesDetailResponse, newItem: SeriesDetailResponse
+                    oldItem: CommonCharacterDetailResponse, newItem: CommonCharacterDetailResponse
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: SeriesDetailResponse, newItem: SeriesDetailResponse
+                    oldItem: CommonCharacterDetailResponse, newItem: CommonCharacterDetailResponse
                 ): Boolean {
                     return oldItem == newItem
                 }
@@ -36,14 +37,16 @@ class SeriesDetailAdapter() : RecyclerView.Adapter<SeriesDetailAdapter.SeriesDet
         val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(SeriesDetailsResponse: SeriesDetailResponse) {
+        fun bind(commonCharacterDetailResponse: CommonCharacterDetailResponse) {
             with(binding) {
-                tvTitle.text = SeriesDetailsResponse.title
-                tvDescription.text = SeriesDetailsResponse.description
-                val getUrl = SeriesDetailsResponse.thumbnail?.path?.replaceUrlImage()
+                tvTitle.text = commonCharacterDetailResponse.title ?: context.getString(R.string.no_title)
+                tvDescription.text = commonCharacterDetailResponse.description ?: context.getString(
+                    R.string.no_description
+                )
+                val getUrl = commonCharacterDetailResponse.thumbnail?.path?.replaceUrlImage()
                 val imagePath =
                     Uri.parse(
-                        SeriesDetailsResponse.thumbnail?.extension?.let { extenstion ->
+                        commonCharacterDetailResponse.thumbnail?.extension?.let { extenstion ->
                             getUrl?.let { url ->
                                 getUrlImageWithExtension(
                                     url,
@@ -54,7 +57,7 @@ class SeriesDetailAdapter() : RecyclerView.Adapter<SeriesDetailAdapter.SeriesDet
                     )
                 ivDynamicItem.setImageURI(imagePath)
                 val nextPrev =
-                    "${SeriesDetailsResponse.next?.name} - ${SeriesDetailsResponse.previous?.name}"
+                    "${commonCharacterDetailResponse.next?.name} - ${commonCharacterDetailResponse.previous?.name}"
                 tvDynamicItem.text = nextPrev
 
             }
@@ -77,7 +80,7 @@ class SeriesDetailAdapter() : RecyclerView.Adapter<SeriesDetailAdapter.SeriesDet
 
     override fun getItemCount(): Int = mDiffer.currentList.size
 
-    fun submitList(list: List<SeriesDetailResponse?>) {
+    fun submitList(list: List<CommonCharacterDetailResponse?>) {
         mDiffer.submitList(list)
     }
 }

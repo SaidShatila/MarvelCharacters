@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import said.shatila.marvelcharacters.data.models.remote.response.EventsDetailResponse
+import said.shatila.marvelcharacters.R
+import said.shatila.marvelcharacters.data.models.remote.response.CommonCharacterDetailResponse
 import said.shatila.marvelcharacters.databinding.ItemDynamicCharacterDetailBinding
 import said.shatila.marvelcharacters.util.getUrlImageWithExtension
 import said.shatila.marvelcharacters.util.replaceUrlImage
@@ -15,18 +16,18 @@ import said.shatila.marvelcharacters.util.replaceUrlImage
 class EventDetailAdapter() :
     RecyclerView.Adapter<EventDetailAdapter.EventDetailViewHolder>() {
 
-    private val mDiffer: AsyncListDiffer<EventsDetailResponse?> =
-        AsyncListDiffer<EventsDetailResponse?>(
+    private val mDiffer: AsyncListDiffer<CommonCharacterDetailResponse?> =
+        AsyncListDiffer<CommonCharacterDetailResponse?>(
             this,
-            object : DiffUtil.ItemCallback<EventsDetailResponse?>() {
+            object : DiffUtil.ItemCallback<CommonCharacterDetailResponse?>() {
                 override fun areItemsTheSame(
-                    oldItem: EventsDetailResponse, newItem: EventsDetailResponse
+                    oldItem: CommonCharacterDetailResponse, newItem: CommonCharacterDetailResponse
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: EventsDetailResponse, newItem: EventsDetailResponse
+                    oldItem: CommonCharacterDetailResponse, newItem: CommonCharacterDetailResponse
                 ): Boolean {
                     return oldItem == newItem
                 }
@@ -37,14 +38,16 @@ class EventDetailAdapter() :
         val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(EventsDetailResponse: EventsDetailResponse) {
+        fun bind(commonCharacterDetailResponse: CommonCharacterDetailResponse) {
             with(binding) {
-                tvTitle.text = EventsDetailResponse.title
-                tvDescription.text = EventsDetailResponse.description
-                val getUrl = EventsDetailResponse.thumbnail?.path?.replaceUrlImage()
+                tvTitle.text = commonCharacterDetailResponse.title ?: context.getString(R.string.no_title)
+                tvDescription.text = commonCharacterDetailResponse.description ?: context.getString(
+                    R.string.no_description
+                )
+                val getUrl = commonCharacterDetailResponse.thumbnail?.path?.replaceUrlImage()
                 val imagePath =
                     Uri.parse(
-                        EventsDetailResponse.thumbnail?.extension?.let { extenstion ->
+                        commonCharacterDetailResponse.thumbnail?.extension?.let { extenstion ->
                             getUrl?.let { url ->
                                 getUrlImageWithExtension(
                                     url,
@@ -55,7 +58,7 @@ class EventDetailAdapter() :
                     )
                 ivDynamicItem.setImageURI(imagePath)
                 val nextPrev =
-                    "${EventsDetailResponse.next?.name} - ${EventsDetailResponse.previous?.name}"
+                    "${commonCharacterDetailResponse.next?.name} - ${commonCharacterDetailResponse.previous?.name}"
                 tvDynamicItem.text = nextPrev
 
             }
@@ -72,13 +75,13 @@ class EventDetailAdapter() :
     }
 
     override fun onBindViewHolder(holder: EventDetailViewHolder, position: Int) {
-        val EventsDetailResponse = mDiffer.currentList[position]
-        EventsDetailResponse?.let { eventsDetail -> holder.bind(eventsDetail) }
+        val CommonCharacterDetailResponse = mDiffer.currentList[position]
+        CommonCharacterDetailResponse?.let { eventsDetail -> holder.bind(eventsDetail) }
     }
 
     override fun getItemCount(): Int = mDiffer.currentList.size
 
-    fun submitList(list: List<EventsDetailResponse?>) {
+    fun submitList(list: List<CommonCharacterDetailResponse?>) {
         mDiffer.submitList(list)
     }
 }

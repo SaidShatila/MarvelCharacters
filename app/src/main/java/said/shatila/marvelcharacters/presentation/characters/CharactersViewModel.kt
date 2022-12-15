@@ -34,6 +34,6 @@ class CharactersViewModel @Inject constructor(private val mainRepository: MainRe
             UIEventCharacters
 
         data class OnLoading(val isLoading: Boolean) : UIEventCharacters
-        data class ShowErrorDialog(val error: Throwable) : UIEventCharacters
+        data class ShowError(val error: Throwable) : UIEventCharacters
     }
 }

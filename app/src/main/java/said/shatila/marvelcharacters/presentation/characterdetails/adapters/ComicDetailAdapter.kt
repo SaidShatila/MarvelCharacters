@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import said.shatila.marvelcharacters.data.models.remote.response.ComicDetailsResponse
+import said.shatila.marvelcharacters.R
+import said.shatila.marvelcharacters.data.models.remote.response.CommonCharacterDetailResponse
 import said.shatila.marvelcharacters.databinding.ItemDynamicCharacterDetailBinding
 import said.shatila.marvelcharacters.util.getUrlImageWithExtension
 import said.shatila.marvelcharacters.util.replaceUrlImage
@@ -15,18 +16,18 @@ import said.shatila.marvelcharacters.util.replaceUrlImage
 class ComicDetailAdapter() :
     RecyclerView.Adapter<ComicDetailAdapter.ComicDetailViewHolder>() {
 
-    private val mDiffer: AsyncListDiffer<ComicDetailsResponse?> =
-        AsyncListDiffer<ComicDetailsResponse?>(
+    private val mDiffer: AsyncListDiffer<CommonCharacterDetailResponse?> =
+        AsyncListDiffer<CommonCharacterDetailResponse?>(
             this,
-            object : DiffUtil.ItemCallback<ComicDetailsResponse?>() {
+            object : DiffUtil.ItemCallback<CommonCharacterDetailResponse?>() {
                 override fun areItemsTheSame(
-                    oldItem: ComicDetailsResponse, newItem: ComicDetailsResponse
+                    oldItem: CommonCharacterDetailResponse, newItem: CommonCharacterDetailResponse
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: ComicDetailsResponse, newItem: ComicDetailsResponse
+                    oldItem: CommonCharacterDetailResponse, newItem: CommonCharacterDetailResponse
                 ): Boolean {
                     return oldItem == newItem
                 }
@@ -37,14 +38,17 @@ class ComicDetailAdapter() :
         val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(comicDetailsResponse: ComicDetailsResponse) {
+        fun bind(commonCharacterDetailResponse: CommonCharacterDetailResponse) {
             with(binding) {
-                tvTitle.text = comicDetailsResponse.title
-                tvDescription.text = comicDetailsResponse.description
-                val getUrl = comicDetailsResponse.thumbnail?.path?.replaceUrlImage()
+                tvTitle.text =
+                    commonCharacterDetailResponse.title ?: context.getString(R.string.no_title)
+                tvDescription.text = commonCharacterDetailResponse.description ?: context.getString(
+                    R.string.no_description
+                )
+                val getUrl = commonCharacterDetailResponse.thumbnail?.path?.replaceUrlImage()
                 val imagePath =
                     Uri.parse(
-                        comicDetailsResponse.thumbnail?.extension?.let { extenstion ->
+                        commonCharacterDetailResponse.thumbnail?.extension?.let { extenstion ->
                             getUrl?.let { url ->
                                 getUrlImageWithExtension(
                                     url,
@@ -54,7 +58,7 @@ class ComicDetailAdapter() :
                         }
                     )
                 ivDynamicItem.setImageURI(imagePath)
-                comicDetailsResponse.prices?.forEach { priceResponse ->
+                commonCharacterDetailResponse.prices?.forEach { priceResponse ->
                     tvDynamicItem.text = priceResponse.price.toString()
 
                 }
@@ -72,13 +76,13 @@ class ComicDetailAdapter() :
     }
 
     override fun onBindViewHolder(holder: ComicDetailViewHolder, position: Int) {
-        val comicDetailsResponse = mDiffer.currentList[position]
-        comicDetailsResponse?.let { comicDetails -> holder.bind(comicDetails) }
+        val CommonCharacterDetailResponse = mDiffer.currentList[position]
+        CommonCharacterDetailResponse?.let { comicDetails -> holder.bind(comicDetails) }
     }
 
     override fun getItemCount(): Int = mDiffer.currentList.size
 
-    fun submitList(list: List<ComicDetailsResponse?>) {
+    fun submitList(list: List<CommonCharacterDetailResponse?>) {
         mDiffer.submitList(list)
     }
 }

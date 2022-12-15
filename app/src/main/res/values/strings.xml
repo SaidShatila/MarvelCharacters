@@ -16,4 +16,7 @@
     <string name="description_s">Description: %s</string>
     <string name="dynamic">Dynamic</string>
     <string name="no_data_found">No Data Found</string>
+    <string name="retry">Retry</string>
+    <string name="no_title">No Title</string>
+    <string name="no_description">No Description</string>
 </resources>
