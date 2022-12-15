@@ -28,4 +28,33 @@
         app:lottie_loop="true"
         app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_s0d3ubne.json" />
 
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/drawable_white_background_ochre_stroke"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingVertical="10dp"
+        android:text="@string/no_data_found"
+        android:textAlignment="center"
+        android:textColor="@color/internation_orange_gate_bridge"
+        android:textSize="30sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/animationView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRetry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/drawable_white_background_ochre_stroke"
+        android:text="@string/retry"
+        android:textColor="@color/internation_orange_gate_bridge"
+        android:textSize="25sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tv_no_data" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

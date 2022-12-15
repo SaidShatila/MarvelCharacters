@@ -45,6 +45,7 @@ class CharactersFragment : Fragment() {
             getCharactersData()
         }
         handleCharactersData()
+        btnRetry()
     }
 
     private suspend fun getCharactersData() {
@@ -61,13 +62,23 @@ class CharactersFragment : Fragment() {
                     is CharactersViewModel.UIEventCharacters.OnLoading -> {
                         binding.animationView.isVisible = uiEvent.isLoading
                     }
-                    is CharactersViewModel.UIEventCharacters.ShowErrorDialog -> {
-                        binding.animationView.isVisible = false
+                    is CharactersViewModel.UIEventCharacters.ShowError -> {
+                        showEmptyView()
                     }
                     is CharactersViewModel.UIEventCharacters.Nothing -> {
+                        showEmptyView()
                     }
                 }
             }
+        }
+    }
+
+    private fun btnRetry() {
+        binding.btnRetry.setOnClickListener {
+            charactersViewModel.viewModelScope.launch {
+                getCharactersData()
+            }
+            showLoading()
         }
     }
 
@@ -75,8 +86,7 @@ class CharactersFragment : Fragment() {
         adapter = CharactersAdapter() { characterResponse ->
             findNavController().navigate(
                 CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(
-                    characterResponse.id,
-                    characterResponse.name
+                    characterResponse.id, characterResponse.name
                 )
             )
         }
@@ -84,8 +94,7 @@ class CharactersFragment : Fragment() {
             adapter.retry()
         }
         binding.rvCharacters.adapter = adapter
-        binding.rvCharacters.layoutManager =
-            GridLayoutManager(requireContext(), 2)
+        binding.rvCharacters.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvCharacters.adapter = adapter.withLoadStateFooter(loadStateAdapter)
         adapter.addLoadStateListener {
             if (it.refresh is LoadState.Loading) showLoading()
@@ -99,8 +108,9 @@ class CharactersFragment : Fragment() {
 
         adapter.submitData(lifecycle, characters)
         adapter.addLoadStateListener {
-            binding.rvCharacters.isVisible =
-                !(adapter.itemCount == 0 && it.refresh != LoadState.Loading)
+            val isListEmpty = it.refresh is LoadState.NotLoading && adapter.itemCount == 0
+            binding.rvCharacters.isVisible = !isListEmpty
+            showEmptyView(!isListEmpty)
         }
     }
 
@@ -110,5 +120,14 @@ class CharactersFragment : Fragment() {
 
     private fun hideLoading() {
         binding.animationView.isVisible = false
+    }
+
+    private fun showEmptyView(isEmpty: Boolean = true) {
+        with(binding) {
+            animationView.isVisible = !isEmpty
+            rvCharacters.isVisible = !isEmpty
+            tvNoData.isVisible = isEmpty
+            btnRetry.isVisible = isEmpty
+        }
     }
 }
