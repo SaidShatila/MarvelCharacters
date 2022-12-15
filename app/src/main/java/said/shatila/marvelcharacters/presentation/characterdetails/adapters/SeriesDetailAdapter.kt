@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import said.shatila.marvelcharacters.R
 import said.shatila.marvelcharacters.data.models.remote.response.CommonCharacterDetailResponse
 import said.shatila.marvelcharacters.databinding.ItemDynamicCharacterDetailBinding
 import said.shatila.marvelcharacters.util.getUrlImageWithExtension
@@ -38,8 +39,10 @@ class SeriesDetailAdapter() : RecyclerView.Adapter<SeriesDetailAdapter.SeriesDet
         RecyclerView.ViewHolder(binding.root) {
         fun bind(commonCharacterDetailResponse: CommonCharacterDetailResponse) {
             with(binding) {
-                tvTitle.text = commonCharacterDetailResponse.title
-                tvDescription.text = commonCharacterDetailResponse.description
+                tvTitle.text = commonCharacterDetailResponse.title ?: context.getString(R.string.no_title)
+                tvDescription.text = commonCharacterDetailResponse.description ?: context.getString(
+                    R.string.no_description
+                )
                 val getUrl = commonCharacterDetailResponse.thumbnail?.path?.replaceUrlImage()
                 val imagePath =
                     Uri.parse(
