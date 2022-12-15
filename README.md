@@ -10,6 +10,9 @@
 #### Used ViewModels as well.
 #### Sealed classes and states where added.
 #### Kotlin-coroutines were used for blocking operations(fetching Character list from the server).
+#### Used latest Jetpack libraries.
+#### Jetpack navigation.
+#### Paging 3.
 
 ## Architecture:
 I am using the MVVM architecture and some state machine concept on top of it. Every screen has a view, a model, and a ViewModel. The ViewModel contains a state that represents the properties of the View. This state will be emitted using Flow to the observer(view).
