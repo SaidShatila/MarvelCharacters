@@ -18,23 +18,23 @@ interface AppApi {
     suspend fun getCharacterComics(
         @Path("characterId") characterId: Int,
         @Query("limit") limit: Int = 3,
-    ): BaseResponse<ComicMainResponse>
+    ): BaseResponse<CommonMainCharacterDetailResponse>
 
     @GET(Constants.characterEvents)
     suspend fun getCharacterEvents(
         @Path("characterId") characterId: Int,
         @Query("limit") limit: Int = 3,
-    ): BaseResponse<EventsMainResponse>
+    ): BaseResponse<CommonMainCharacterDetailResponse>
 
     @GET(Constants.characterSeries)
     suspend fun getCharacterSeries(
         @Path("characterId") characterId: Int,
         @Query("limit") limit: Int = 3,
-    ): BaseResponse<SeriesMainResponse>
+    ): BaseResponse<CommonMainCharacterDetailResponse>
 
     @GET(Constants.characterStories)
     suspend fun getCharacterStories(
         @Path("characterId") characterId: Int,
         @Query("limit") limit: Int = 3,
-    ): BaseResponse<StoriesMainResponse>
+    ): BaseResponse<CommonMainCharacterDetailResponse>
 }

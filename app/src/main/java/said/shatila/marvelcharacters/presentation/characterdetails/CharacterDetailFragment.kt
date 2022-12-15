@@ -13,10 +13,7 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import said.shatila.marvelcharacters.R
-import said.shatila.marvelcharacters.data.models.remote.response.ComicDetailsResponse
-import said.shatila.marvelcharacters.data.models.remote.response.EventsDetailResponse
-import said.shatila.marvelcharacters.data.models.remote.response.SeriesDetailResponse
-import said.shatila.marvelcharacters.data.models.remote.response.StoriesDetailResponse
+import said.shatila.marvelcharacters.data.models.remote.response.*
 import said.shatila.marvelcharacters.databinding.FragmentCharacterDetailBinding
 import said.shatila.marvelcharacters.presentation.characterdetails.adapters.ComicDetailAdapter
 import said.shatila.marvelcharacters.presentation.characterdetails.adapters.EventDetailAdapter
@@ -141,7 +138,7 @@ class CharacterDetailFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerViewComic(comicList: List<ComicDetailsResponse>) {
+    private fun setupRecyclerViewComic(comicList: List<CommonCharacterDetailResponse>) {
         comicAdapter = ComicDetailAdapter()
         with(viewBinding) {
             rvCharacterComics.apply {
@@ -161,7 +158,7 @@ class CharacterDetailFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerViewEvent(eventsList: List<EventsDetailResponse>) {
+    private fun setupRecyclerViewEvent(eventsList: List<CommonCharacterDetailResponse>) {
         eventsAdapter = EventDetailAdapter()
         with(viewBinding) {
             rvCharacterEvents.apply {
@@ -181,7 +178,7 @@ class CharacterDetailFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerViewSeries(seriesList: List<SeriesDetailResponse>) {
+    private fun setupRecyclerViewSeries(seriesList: List<CommonCharacterDetailResponse>) {
         seriesAdapter = SeriesDetailAdapter()
         with(viewBinding) {
             rvCharacterSeries.apply {
@@ -201,7 +198,7 @@ class CharacterDetailFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerViewStories(storiesList: List<StoriesDetailResponse>) {
+    private fun setupRecyclerViewStories(storiesList: List<CommonCharacterDetailResponse>) {
         storiesAdapter = StoriesDetailAdapter()
         with(viewBinding) {
             rvCharacterStories.apply {
