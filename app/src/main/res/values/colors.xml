@@ -12,4 +12,13 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+    <color name="red">#FF0000</color>
+    <color name="red_500">#FFC107</color>
+    <color name="dim_foreground_disabled_material_dark">#39EF4C4C</color>
+    <color name="dim_foreground_disabled_material_light">#FF7F7F</color>
+    <color name="internation_orange_gate_bridge">#c32f27</color>
+    <color name="burgundy">#780116</color>
+    <color name="burgundy_dim">#3B780116</color>
+    <color name="maximum_yellow_red">#F7B538</color>
+    <color name="ochre">#db7c26</color>
 </resources>

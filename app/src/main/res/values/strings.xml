@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">marvelcharacters</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <string name="something_went_wrong">something went wrong</string>
+    <string name="continue_text">Continue</string>
+    <string name="check_server">check_server</string>
+    <string name="network_error_message">Something went wrong</string>
+    <string name="text_try_again">Try Again</string>
+    <string name="character_id">Character Id = %s</string>
+    <string name="comics">Comics</string>
+    <string name="events">Events</string>
+    <string name="stories">Stories</string>
+    <string name="series">Series</string>
+    <string name="title_s">Title: %s</string>
+    <string name="description_s">Description: %s</string>
+    <string name="dynamic">Dynamic</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="retry">Retry</string>
+    <string name="no_title">No Title</string>
+    <string name="no_description">No Description</string>
 </resources>
