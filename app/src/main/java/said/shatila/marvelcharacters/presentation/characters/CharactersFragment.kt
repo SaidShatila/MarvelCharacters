@@ -39,7 +39,6 @@ class CharactersFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         setupRecyclerView()
         charactersViewModel.viewModelScope.launch {
             getCharactersData()
@@ -50,6 +49,7 @@ class CharactersFragment : Fragment() {
 
     private suspend fun getCharactersData() {
         charactersViewModel.getCharacters()
+        showLoading()
     }
 
     private fun handleCharactersData() {
@@ -105,12 +105,14 @@ class CharactersFragment : Fragment() {
     }
 
     private fun setupData(characters: PagingData<CharacterResponse>) {
-
         adapter.submitData(lifecycle, characters)
         adapter.addLoadStateListener {
-            val isListEmpty = it.refresh is LoadState.NotLoading && adapter.itemCount == 0
-            binding.rvCharacters.isVisible = !isListEmpty
-            showEmptyView(!isListEmpty)
+            val isListEmpty = adapter.itemCount == 0 && it.refresh != LoadState.Loading
+            if (isListEmpty) {
+                showEmptyView()
+            } else {
+                hideEmptyView()
+            }
         }
     }
 
@@ -122,12 +124,19 @@ class CharactersFragment : Fragment() {
         binding.animationView.isVisible = false
     }
 
-    private fun showEmptyView(isEmpty: Boolean = true) {
+    private fun showEmptyView() {
         with(binding) {
-            animationView.isVisible = !isEmpty
-            rvCharacters.isVisible = !isEmpty
-            tvNoData.isVisible = isEmpty
-            btnRetry.isVisible = isEmpty
+            rvCharacters.isVisible = false
+            tvNoData.isVisible = true
+            btnRetry.isVisible = true
+        }
+    }
+
+    private fun hideEmptyView() {
+        with(binding) {
+            rvCharacters.isVisible = true
+            tvNoData.isVisible = false
+            btnRetry.isVisible = false
         }
     }
 }
