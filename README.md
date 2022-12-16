@@ -24,5 +24,5 @@ I also use sealed classes to model some repetitive behaviors. Like, when fetchin
 Repository is the single source of truth that is used to fetch data(either from the network or from the local storage).
 
 ## Future Enhancements:
-In addition I will add Anime Tv Series and even include a search bar, improve the UI Design of the app maybe even 
+I will add include a search bar, improve the UI Design of the app maybe even 
 
